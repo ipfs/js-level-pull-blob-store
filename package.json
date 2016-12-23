@@ -1,0 +1,29 @@
+{
+  "name": "js-level-pull-blob-store",
+  "version": "0.0.1",
+  "description": "LevelDB implementation for interface-pull-blob-store",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ipfs/js-level-pull-blob-store.git"
+  },
+  "keywords": [
+    "pull-stream",
+    "blob store",
+    "streaming",
+    "leveldb",
+    "level"
+  ],
+  "author": "Sid Harder <sideharder@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ipfs/js-level-pull-blob-store/issues"
+  },
+  "contributors": [
+    "David Dias <daviddias.p@gmail.com>",    
+  ],
+  "homepage": "https://github.com/ipfs/js-level-pull-blob-store#readme"
+}
