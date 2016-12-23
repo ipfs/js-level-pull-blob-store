@@ -1,2 +1,2 @@
 # js-level-pull-blob-store
-Leveldb implementation of interface-pull-blob-store
+pull-blob-store implementation for LevelDB.
