@@ -4,11 +4,26 @@
   "description": "LevelDB implementation for interface-pull-blob-store",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "aegir-lint",
+    "release": "aegir-release",
+    "build": "aegir-build",
+    "test": "aegir-test",
+    "test:node": "aegir-test node",
+    "test:browser": "aegir-test browser",
+    "coverage": "aegir-coverage",
+    "coverage-publish": "aegir-coverage publish"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ipfs/js-level-pull-blob-store.git"
+  },
+  "dependencies": {
+    "Level": "^1.5.0",
+    "pull-defer": "^0.2.2",
+    "pull-pushable": "^2.0.1",
+    "pull-window": "^2.1.4",
+    "pull-write": "^1.0.2",
+    "typedarray-to-buffer": "^3.1.2"
   },
   "keywords": [
     "pull-stream",
@@ -23,7 +38,8 @@
     "url": "https://github.com/ipfs/js-level-pull-blob-store/issues"
   },
   "contributors": [
-    "David Dias <daviddias.p@gmail.com>",    
+    "Friedel Ziegelmayer <dignifiedquire@gmail.com>",
+    "David Dias <daviddias.p@gmail.com>"
   ],
   "homepage": "https://github.com/ipfs/js-level-pull-blob-store#readme"
 }
