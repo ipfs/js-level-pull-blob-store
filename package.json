@@ -1,7 +1,7 @@
 {
-  "name": "idb-pull-blob-store",
+  "name": "level-pull-blob-store",
   "version": "0.5.1",
-  "description": "IndexedDB implementation for interface-pull-blob-store",
+  "description": "LevelDB implementation for interface-pull-blob-store",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "scripts": {
@@ -16,8 +16,8 @@
     "pull-stream",
     "blob store",
     "streaming",
-    "indexeddb",
-    "idb"
+    "leveldb",
+    "levelup"
   ],
   "author": "Sid Harder <sideharder@gmail.com>",
   "license": "MIT",
@@ -40,8 +40,7 @@
   "homepage": "https://github.com/ipfs/js-level-pull-blob-store",
   "contributors": [
     "David Dias <daviddias.p@gmail.com>",
-    "Friedel Ziegelmayer <dignifiedquire@gmail.com>",
-    "greenkeeperio-bot <support@greenkeeper.io>"
+    "Friedel Ziegelmayer <dignifiedquire@gmail.com>"
   ],
   "repository": {
     "type": "git",
