@@ -7,11 +7,17 @@ const levelDown = require('leveldown')
 
 testSuite({
   setup (cb) {
-    cb(null, new LevelBlobStore('test'))
+    cb(null, new LevelBlobStore('tmplevel'))
   },
   teardown (store, cb) {
-    store.db.close()
-    levelDown.destroy(store.path)
-    cb()
+    store.db.close(function () {
+      levelDown.destroy('tmplevel', function (err) {
+        if (err) {
+          cb(err)
+        } else {
+          cb()
+        }
+      })
+    })
   }
 })

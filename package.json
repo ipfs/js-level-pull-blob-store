@@ -1,45 +1,50 @@
 {
-  "name": "js-level-pull-blob-store",
-  "version": "0.0.1",
-  "description": "LevelDB implementation for interface-pull-blob-store",
-  "main": "src/index.js",
+  "name": "idb-pull-blob-store",
+  "version": "0.5.1",
+  "description": "IndexedDB implementation for interface-pull-blob-store",
+  "main": "lib/index.js",
+  "jsnext:main": "src/index.js",
   "scripts": {
     "lint": "aegir-lint",
-    "release": "aegir-release",
     "build": "aegir-build",
-    "test": "aegir-test",
-    "test:node": "aegir-test node",
-    "test:browser": "aegir-test browser",
-    "coverage": "aegir-coverage",
-    "coverage-publish": "aegir-coverage publish"
+    "test": "aegir-test --env node",
+    "release": "npm run build && aegir-release --env node",
+    "release-minor": "npm run build && aegir-release --type minor --env node",
+    "release-major": "npm run build && aegir-release --type major --env node"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ipfs/js-level-pull-blob-store.git"
+  "keywords": [
+    "pull-stream",
+    "blob store",
+    "streaming",
+    "indexeddb",
+    "idb"
+  ],
+  "author": "Sid Harder <sideharder@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "aegir": "^9.2.1",
+    "chai": "^3.5.0",
+    "interface-pull-blob-store": "^0.6.0"
   },
   "dependencies": {
-    "Level": "^1.5.0",
+    "level": "^1.5.0",
     "pull-defer": "^0.2.2",
     "pull-pushable": "^2.0.1",
     "pull-window": "^2.1.4",
     "pull-write": "^1.0.2",
     "typedarray-to-buffer": "^3.1.2"
   },
-  "keywords": [
-    "pull-stream",
-    "blob store",
-    "streaming",
-    "leveldb",
-    "level"
-  ],
-  "author": "Sid Harder <sideharder@gmail.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ipfs/js-level-pull-blob-store/issues"
   },
+  "homepage": "https://github.com/ipfs/js-level-pull-blob-store",
   "contributors": [
+    "David Dias <daviddias.p@gmail.com>",
     "Friedel Ziegelmayer <dignifiedquire@gmail.com>",
-    "David Dias <daviddias.p@gmail.com>"
+    "greenkeeperio-bot <support@greenkeeper.io>"
   ],
-  "homepage": "https://github.com/ipfs/js-level-pull-blob-store#readme"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ipfs/js-level-pull-blob-store.git"
+  }
 }

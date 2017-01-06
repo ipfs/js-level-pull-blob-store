@@ -7,4 +7,4 @@
 pull-blob-store implementation for LevelDB.
 
 Credits:
-Original work for this module was inspired by https://github.com/dignifiedquire, and can be found here https://github.com/ipfs/js-idb-pull-blob-store
+Original work for this module was inspired by https://github.com/dignifiedquire, and can be found here https://github.com/ipfs/js-idb-pull-blob-store.

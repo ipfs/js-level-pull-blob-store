@@ -1,20 +1,20 @@
 'use strict'
-
-const Level = require('level')
+const level = require('level')
 const write = require('pull-write')
 const pushable = require('pull-pushable')
-const toBuffer = require('typedarray-to-buffer')
 const defer = require('pull-defer/sink')
 const toWindow = require('pull-window').recent
 const pull = require('pull-stream')
+const toBuffer = require('typedarray-to-buffer')
 
 module.exports = class LevelBlobStore {
   constructor (dbname) {
-    this.path = dbname || `pull-blob-store-${Math.random().toString().slice(2, 10)}`
-    this.db = Level(this.path, { valueEncoding: 'binary' })
+    //  { valueEncoding: 'binary' }
+    this.db = level(dbname)
   }
 
   write (key, cb) {
+    const db = this.db
     cb = cb || (() => {})
     const d = defer()
 
@@ -23,42 +23,32 @@ module.exports = class LevelBlobStore {
       return d
     }
 
-    this.remove(key, (err) => {
-      if (err) {
-        return cb(err)
+    d.resolve(pull(
+      toWindow(100, 10),
+      write(writer, reduce, 100, cb)
+    ))
+
+    function reduce (queue, data) {
+      queue = queue || []
+      if (!Array.isArray(data)) {
+        data = [data]
       }
 
-      d.resolve(pull(
-        toWindow(100, 10),
-        write(writer, reduce, 100, cb)
-      ))
+      data = data.map(ensureBuffer)
 
-      function writer (data, cb) {
-        var buffer = new Buffer(data)
-        this.db.put(key, buffer, function (err) {
-          if (err) cb(err)
-        })
+      if (!queue.length || last(queue).length > 99) {
+        queue.push(Buffer.concat(data))
+      } else {
+        queue[lastIndex(queue)] = Buffer.concat(
+          last(queue).concat(data)
+        )
       }
+      return queue
+    }
 
-      function reduce (queue, data) {
-        queue = queue || []
-        if (!Array.isArray(data)) {
-          data = [data]
-        }
-
-        data = data.map(ensureBuffer)
-
-        if (!queue.length || last(queue).length > 99) {
-          queue.push(Buffer.concat(data))
-        } else {
-          queue[lastIndex(queue)] = Buffer.concat(
-            last(queue).concat(data)
-          )
-        }
-
-        return queue
-      }
-    })
+    function writer (blobs, cb) {
+      db.put(key, blobs, cb)
+    }
 
     return d
   }
@@ -68,7 +58,6 @@ module.exports = class LevelBlobStore {
 
     if (!key) {
       p.end(new Error('Missing key'))
-
       return p
     }
 
@@ -82,10 +71,12 @@ module.exports = class LevelBlobStore {
       }
 
       this.db.get(key, function (err, value) {
-        if (err) return p.end(new Error('Error getting value'))
-        // the lines below are wrong, I think not async
-        p.push(toBuffer(value))
-        p.end()
+        if (err) {
+          p.end()
+        } else {
+          p.push(toBuffer(value))
+          p.end()
+        }
       })
     })
 
@@ -100,21 +91,34 @@ module.exports = class LevelBlobStore {
     }
 
     this.db.get(key, function (err, value) {
-      if (err) return cb(new Error('Error getting value'))
-      return cb(null, true)
+      if (err) {
+        cb(null, false)
+      } else {
+        cb(null, true)
+      }
     })
   }
 
   remove (key, cb) {
+    const db = this.db
     cb = cb || (() => {})
 
     if (!key) {
       return cb(new Error('Missing key'))
     }
 
-    this.db.del(key, function (err) {
-      if (err) return cb(new Error('Error removing key'))
-      return cb(null, true)
+    db.get(key, function (err, value) {
+      if (err) {
+        cb()
+      } else {
+        db.del(key, function (err) {
+          if (err) {
+            cb(err)
+          } else {
+            cb()
+          }
+        })
+      }
     })
   }
 }
