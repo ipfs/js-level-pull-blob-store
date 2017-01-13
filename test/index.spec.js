@@ -1,6 +1,7 @@
 'use strict'
 
-const testSuite = require('interface-pull-blob-store/lib/tests')
+//const testSuite = require('interface-pull-blob-store/lib/tests')
+const testSuite = require('../../interface-pull-blob-store/src/tests.js')
 
 const LevelBlobStore = require('../src')
 const levelDown = require('leveldown')
