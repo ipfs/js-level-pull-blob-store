@@ -1,24 +1,21 @@
 'use strict'
 
-//const testSuite = require('interface-pull-blob-store/lib/tests')
-const testSuite = require('../../interface-pull-blob-store/src/tests.js')
+const testSuite = require('interface-pull-blob-store/lib/tests')
+const levelDown = require('leveldown')
+const path = require('path')
+const os = require('os')
 
 const LevelBlobStore = require('../src')
-const levelDown = require('leveldown')
 
 testSuite({
   setup (cb) {
-    cb(null, new LevelBlobStore('tmplevel'))
+    var random = Math.random()
+    var p = path.join(os.tmpdir(), String(process.pid), random.toString().substr(2))
+    cb(null, new LevelBlobStore(p))
   },
   teardown (store, cb) {
     store.db.close(function () {
-      levelDown.destroy('tmplevel', function (err) {
-        if (err) {
-          cb(err)
-        } else {
-          cb()
-        }
-      })
+      levelDown.destroy(store.path, cb)
     })
   }
 })
