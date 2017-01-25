@@ -3,14 +3,13 @@
 const testSuite = require('interface-pull-blob-store/lib/tests')
 const levelDown = require('leveldown')
 const path = require('path')
-const os = require('os')
 
 const LevelBlobStore = require('../src')
 
 testSuite({
   setup (cb) {
-    var random = Math.random()
-    var p = path.join(os.tmpdir(), String(process.pid), random.toString().substr(2))
+    var randomNo = Math.random()
+    var p = path.join('../test', randomNo.toString().substr(2))
     cb(null, new LevelBlobStore(p))
   },
   teardown (store, cb) {
