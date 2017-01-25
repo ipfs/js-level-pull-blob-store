@@ -8,9 +8,9 @@ const LevelBlobStore = require('../src')
 
 testSuite({
   setup (cb) {
-    var randomNo = Math.random()
-    var p = path.join('../test', randomNo.toString().substr(2))
-    cb(null, new LevelBlobStore(p))
+    var randomStr = Math.random().toString().substr(2)
+    var databasePath = path.join('../test', randomStr)
+    cb(null, new LevelBlobStore(databasePath))
   },
   teardown (store, cb) {
     store.db.close(function () {
