@@ -9,9 +9,8 @@ const toBuffer = require('typedarray-to-buffer')
 
 module.exports = class LevelBlobStore {
   constructor (dbname) {
-    //  { valueEncoding: 'binary' }
     this.path = dbname
-    this.db = level(this.path)
+    this.db = level(this.path, { valueEncoding: 'binary' })
   }
 
   write (key, cb) {
@@ -47,8 +46,9 @@ module.exports = class LevelBlobStore {
       return queue
     }
 
-    function writer (blobs, cb) {
-      db.put(key, blobs, cb)
+    function writer (blobs, cb) {      
+      var singleBuffer = new Buffer.concat(blobs)
+      db.put(key, singleBuffer, cb)
     }
 
     return d
