@@ -1,8 +1,8 @@
 {
   "name": "level-pull-blob-store",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "LevelDB implementation for interface-pull-blob-store",
-  "main": "src/index.js",  
+  "main": "src/index.js",
   "keywords": [
     "pull-stream",
     "blob store",
