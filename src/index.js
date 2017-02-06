@@ -1,4 +1,5 @@
 'use strict'
+
 const level = require('level')
 const write = require('pull-write')
 const pushable = require('pull-pushable')
@@ -46,7 +47,7 @@ module.exports = class LevelBlobStore {
       return queue
     }
 
-    function writer (blobs, cb) {      
+    function writer (blobs, cb) {
       var singleBuffer = new Buffer.concat(blobs)
       db.put(key, singleBuffer, cb)
     }
