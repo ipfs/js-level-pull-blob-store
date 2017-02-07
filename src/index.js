@@ -44,6 +44,8 @@ module.exports = class LevelBlobStore {
           last(queue).concat(data)
         )
       }
+
+      console.log(queue.toString())
       return queue
     }
 
