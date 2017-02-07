@@ -10,12 +10,15 @@
     "leveldb",
     "levelup"
   ],
+  "scripts": {
+    "test": "aegir-test --env node"
+  },
   "author": "Sid Harder <sideharder@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "aegir": "^9.3.2",
     "chai": "^3.5.0",
-    "interface-pull-blob-store": "^0.6.0"
+    "interface-pull-blob-store": "^0.6.0",
+    "standard": "^8.6.0"
   },
   "dependencies": {
     "level": "^1.6.0",

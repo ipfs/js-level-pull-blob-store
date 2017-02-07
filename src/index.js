@@ -17,6 +17,7 @@ module.exports = class LevelBlobStore {
   write (key, cb) {
     const db = this.db
     cb = cb || (() => {})
+
     const d = defer()
 
     if (!key) {
