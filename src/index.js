@@ -1,4 +1,5 @@
 'use strict'
+
 const level = require('level')
 const write = require('pull-write')
 const pushable = require('pull-pushable')
@@ -9,9 +10,8 @@ const toBuffer = require('typedarray-to-buffer')
 
 module.exports = class LevelBlobStore {
   constructor (dbname) {
-    //  { valueEncoding: 'binary' }
     this.path = dbname
-    this.db = level(this.path)
+    this.db = level(this.path, { valueEncoding: 'binary' })
   }
 
   write (key, cb) {
@@ -50,7 +50,8 @@ module.exports = class LevelBlobStore {
     }
 
     function writer (blobs, cb) {
-      db.put(key, blobs, cb)
+      var singleBuffer = new Buffer.concat(blobs)
+      db.put(key, singleBuffer, cb)
     }
 
     return d
