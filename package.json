@@ -11,21 +11,22 @@
     "levelup"
   ],
   "scripts": {
-    "test": "aegir-test --env node"
+    "test": "aegir-test --env node",
+    "test": "aegir-release --env node"
   },
   "author": "Sid Harder <sideharder@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "aegir": "^9.2.1",
+    "aegir": "^10.0.0",
     "chai": "^3.5.0",
-    "interface-pull-blob-store": "^0.6.0"
+    "interface-pull-blob-store": "~0.6.0"
   },
   "dependencies": {
     "level": "^1.6.0",
     "pull-defer": "^0.2.2",
     "pull-pushable": "^2.0.1",
     "pull-window": "^2.1.4",
-    "pull-write": "^1.0.2",
+    "pull-write": "^1.1.1",
     "typedarray-to-buffer": "^3.1.2"
   },
   "bugs": {
